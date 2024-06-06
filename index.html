@@ -15,21 +15,54 @@
                    className: "info",
                 }).showToast();
               }
+			  // About function
 			function about() {
               document.getElementById('textarea').value = 'This app created by: Abodx\n\nAnti Ai Detector v 1.0\n\nThis app will bypass the AI detectors Very easy \n You will get 100% Human Text results ;)';
               }
-			function encrypt() {
-              var textarea = document.getElementById("textarea");
-              var xhr = new XMLHttpRequest();
-              xhr.open("POST", "/encode", true);
-              xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-              xhr.onreadystatechange = function() {
-              if (xhr.readyState === 4 && xhr.status === 200) {
-                textarea.value = xhr.responseText;
-              }
-             };
-              xhr.send("textarea=" + textarea.value);
+
+			  // Function to encode the text
+			  function encrypt() {
+                   var textarea = document.getElementById("textarea");
+                   var text = textarea.value;
+
+                   // Encode the text using the provided function
+                   var encodedText = encoding(text);
+
+                   // Update the textarea with the encoded text
+                   textarea.value = encodedText;
+
+            // Show a success message
+            Toastify({
+             text: "Text encoded successfully!",
+             backgroundColor: "linear-gradient(to right, #00ff00, #000000)",
+             className: "success",
+            }).showToast();
             }
+
+          function encode_string(text) {
+                 const specialChars = ['\u200D', '\u200B', '\uFEFF'];
+
+                 let encodedText = '';
+
+                 // Iterate over each character in the input text
+                 for (let i = 0; i < text.length; i++) {
+                     // Prepend each special character before the current character
+                     for (const char of specialChars) {
+                         encodedText += char;
+                     }
+                     // Add the current character from the input text
+                     encodedText += text[i];
+                 }
+
+                 // Return the encoded text
+             return encodedText;
+}
+
+          // Function to add a header and encode the text
+          function encoding(code) {
+            return "# Bybassed by Anti Ai Detector \n# Made by Abodx\n\n" + (encode_string(code));
+          }
+
 		</Script>
         <style>
             body{
