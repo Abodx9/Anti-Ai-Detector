@@ -9,4 +9,5 @@ Aad is a tool I created for fun to bypass AI detection algorithms.
 
 ## Test:
 
-<video src="https://github.com/Abodx9/Anti-Ai-Detector/raw/main/Test.mp4" controls></video>
+https://github.com/Abodx9/Anti-Ai-Detector/assets/70515761/bc542914-a7ca-41ec-8e0f-19d147cec078
+
