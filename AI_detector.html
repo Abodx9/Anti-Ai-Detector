@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+		<Script>
+			function copy() {
+              let textarea = document.getElementById("textarea");
+              textarea.select();
+              document.execCommand("copy");
+			  Toastify({
+                   text: "copied to clipboard",
+                   backgroundColor: "linear-gradient(to right, #ff0000, #000000)",
+                   className: "info",
+                }).showToast();
+              }
+			  // About function
+			function about() {
+              document.getElementById('textarea').value = 'This app created by: Abodx + DangerousAngel\n\nAi Detector X v 1.0\n\nThis app will detect the AI writing easily \n You will get 100% Text results ;)';
+              }
+
+
+			  function detect() {
+    var textarea = document.getElementById("textarea");
+    var text = textarea.value.trim(); // Trim whitespace for consistency
+
+    fetch("https://api.zerogpt.com/api/detect/detectText", {
+      method: "POST",
+      headers: {
+		"Host": "api.zerogpt.com",
+		"Access-Control-Allow-Origin": "*",
+        "Content-Length": text.length, 
+        "Accept": "application/json, text/plain, */*",
+        "Content-Type": "application/json",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.6422.112 Safari/537.36",
+        "Origin": "https://www.zerogpt.com",
+        "Referer": "https://www.zerogpt.com/",
+        "Accept-Encoding": "gzip, deflate, br"
+		 },
+      body: JSON.stringify({ input_text: text }),
+    })
+ .then((response) => response.json())
+ .then((data) => {
+        const feedback = data.data.feedback || "Something went wrong!!";
+
+        // Update the textarea with the feedback from the API
+        textarea.value = feedback;
+    })
+ .catch((error) => {
+        console.error("Error:", error);
+    });
+}
+
+		</Script>
+        <style>
+            body{
+	font-family: Arial, Helvetica, sans-serif;	
+}
+
+.wrapper{
+	width: 800px;
+	height: 100vh;
+	margin: 0 auto;
+	
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.cmd{
+	position: relative;
+	display: block;
+	
+	height: 500px;
+	width: 100%;
+	border: 1px solid #000000;
+	border-radius: 4px;
+	overflow: hidden;
+	
+	box-shadow: 0px 8px 18px #121d6fac;
+}
+
+/*
+ * 1. Set position
+ * 2. Set dimension
+ * 3. Style
+ */
+.title-bar{
+	/* 1 */
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	/* 2 */
+	width: 100%;
+	height: 40px;
+	/* 3 */
+	display: block;
+	color: #FFFFFF;
+	line-height: 40px;
+	font-weight: 600;
+	background-color: #0f0532;
+	text-align: left;
+	padding-left: 10px;
+}
+
+.tool-bar{
+	position: absolute;
+	top: 40px;
+	left: 0;
+	right: 0;
+	display: block;
+	width: 100%;
+	height: 30px;
+	line-height: 30px;
+	background: linear-gradient(#0f0532,#291d51);
+}
+
+.tool-bar ul{
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.tool-bar ul li{
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+.tool-bar ul li a{
+	padding: 0px 6px;
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+.tool-bar ul li a:hover{
+	text-decoration: underline;
+}
+
+.textarea{
+	position: relative;
+    height: 420px;
+	padding: 12px;
+	width: 100%;
+	background: linear-gradient(#10112d,#1a102d);
+	border: none;
+	color: #24ba0a;
+	margin: 0px;
+	font-size: 1.1rem;
+}
+        </style>
+        <div class="wrapper">
+            <div class="cmd">
+                <div class="title-bar" style="font-size: 15pt;">Abod@AI-Detector-X: ~   <span style="padding-left: 510px;">•  •  ×<span></div>
+                <div class="tool-bar">
+                    <ul>
+                        <button style="background-color:#24ba0a;color: white; font-size: 14pt; border: none; border-radius: 20px;" onclick="detect()">Detect</a></li>
+                        <button style="background-color:#050a2fac;color: white; font-size: 12pt; border: none; margin-left: 10px;border-radius: 20px;" onclick="copy()">Copy</button>
+						<li><button style="background-color:#050a2fac ;color: white; font-size: 12pt; border: none; border-radius: 20px;" onclick="about()">About</button></li>
+						<li><a style ="background-color: #050a2fac; font-size: 12pt; border-radius: 20px;" href="https://abodx9.github.io/LinksBio/">Me</a></li>
+                    </ul>
+                <textarea placeholder="Paste your Ai generated Text here..."  id="textarea" class="textarea"></textarea>
+                </div>
+            </div>
+        </div>
+    </head>
+</html>
