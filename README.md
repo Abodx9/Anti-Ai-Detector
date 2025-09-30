@@ -1,5 +1,7 @@
 # Anti-Ai-Detector
 Aad is a tool I created for fun to bypass AI detection algorithms.
+- You can try the app [here](https://abodx0anti0ai.edgeone.app/)
+
 
 ## How?
 
